@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Somnia — don't sleep on good roommates.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Somnia is a roommate matching app for college students. Find your perfect roommate, not just any roommate." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" />
+<style>
+  :root {
+    --forest: #1a3a2a;
+    --forest-2: #16331f;
+    --sage: #8fbc8f;
+    --muted: rgba(232,239,229,0.55);
+    --fg: #e8efe5;
+    --line: rgba(143,188,143,0.16);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--forest);
+    color: var(--fg);
+    font-family: "Outfit", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-wordmark { font-size: 24px; font-weight: 500; color: var(--sage); letter-spacing: -0.035em; }
+  .nav-cta {
+    background: var(--sage); color: #000; font-family: "Outfit", sans-serif;
+    font-weight: 600; font-size: 14px; padding: 10px 22px;
+    border-radius: 100px; border: none; cursor: pointer; text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 100px 24px 80px 24px;
+    max-width: 760px; margin: 0 auto;
+  }
+  .hero .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(143,188,143,0.1); border: 1px solid var(--line);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 13px; color: var(--sage); margin-bottom: 36px;
+    letter-spacing: 0.02em;
+  }
+  .hero .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+  .hero h1 {
+    font-size: clamp(48px, 8vw, 88px); font-weight: 700;
+    color: var(--sage); letter-spacing: -0.04em; line-height: 1;
+    margin-bottom: 20px;
+  }
+  .hero .tagline {
+    font-size: clamp(18px, 3vw, 24px); font-weight: 400;
+    color: var(--muted); letter-spacing: -0.01em; margin-bottom: 52px;
+  }
+
+  /* FORM */
+  .form-wrap { width: 100%; max-width: 480px; }
+  form { display: flex; flex-direction: column; gap: 12px; }
+  .input-row { display: flex; gap: 10px; }
+  input[type="email"] {
+    flex: 1; background: var(--forest-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 18px;
+    font-family: "Outfit", sans-serif; font-size: 15px; color: var(--fg);
+    outline: none; transition: border-color 0.15s;
+  }
+  input[type="email"]::placeholder { color: var(--muted); }
+  input[type="email"]:focus { border-color: var(--sage); }
+  button[type="submit"] {
+    background: var(--sage); color: #000;
+    font-family: "Outfit", sans-serif; font-weight: 600; font-size: 15px;
+    padding: 14px 24px; border-radius: 12px; border: none; cursor: pointer;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  button[type="submit"]:hover { opacity: 0.85; }
+  .form-note { font-size: 12px; color: var(--muted); text-align: center; }
+  .success-msg {
+    display: none; background: rgba(143,188,143,0.1);
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; text-align: center;
+    color: var(--sage); font-size: 15px;
+  }
+
+  /* HOW IT WORKS */
+  .section {
+    max-width: 900px; margin: 0 auto; padding: 80px 24px;
+    border-top: 1px solid var(--line);
+  }
+  .section h2 {
+    font-size: 13px; font-weight: 400; color: var(--muted);
+    letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 48px;
+    text-align: center;
+  }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .step {
+    background: var(--forest-2); border: 1px solid var(--line);
+    border-radius: 16px; padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .step .num {
+    font-size: 11px; color: var(--sage); letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .step .title { font-size: 18px; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+  .step .body { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  footer .left { font-size: 13px; color: var(--muted); }
+  footer .left span { color: var(--sage); }
+
+  @media (max-width: 600px) {
+    nav { padding: 20px 24px; }
+    .steps { grid-template-columns: 1fr; }
+    .input-row { flex-direction: column; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 100 100" width="36" height="36" style="display:block">
+      <rect width="100" height="100" rx="22" fill="#1a3a2a" stroke="rgba(143,188,143,0.16)" stroke-width="1"/>
+      <g transform="translate(50 50)">
+        <rect x="-18" y="-26" width="36" height="52" rx="5" fill="#8fbc8f" opacity="0.32" transform="rotate(-16)"/>
+        <rect x="-18" y="-26" width="36" height="52" rx="5" fill="#8fbc8f" opacity="0.62" transform="rotate(-2)"/>
+        <rect x="-18" y="-26" width="36" height="52" rx="5" fill="#8fbc8f" transform="rotate(12)"/>
+        <g transform="rotate(12) translate(0 -3)">
+          <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
+            font-family="Outfit, sans-serif" font-weight="500" font-size="36"
+            fill="#1a3a2a" style="letter-spacing:-0.035em">s</text>
+        </g>
+      </g>
+    </svg>
+    <span class="nav-wordmark">somnia</span>
+  </a>
+  <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<section class="hero" id="waitlist">
+  <div class="badge"><span class="dot"></span> Coming to BU first</div>
+  <h1>somnia</h1>
+  <p class="tagline">don't sleep on good roommates.</p>
+
+  <div class="form-wrap">
+    <form action="https://formspree.io/f/xgodbzke" method="POST" id="waitlist-form">
+      <div class="input-row">
+        <input type="email" name="email" placeholder="your@bu.edu" required />
+        <button type="submit">Join Waitlist</button>
+      </div>
+      <p class="form-note">Be the first to know when Somnia launches at BU.</p>
+    </form>
+    <div class="success-msg" id="success">
+      You're on the list! We'll reach out when Somnia launches at BU.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <span class="num">01</span>
+      <span class="title">Build your profile</span>
+      <p class="body">Tell us about your lifestyle — sleep schedule, diet, habits, and what you're looking for in a living situation.</p>
+    </div>
+    <div class="step">
+      <span class="num">02</span>
+      <span class="title">Get matched</span>
+      <p class="body">Swipe through compatible roommates ranked by how well your lifestyles align. No random pairings.</p>
+    </div>
+    <div class="step">
+      <span class="num">03</span>
+      <span class="title">Move in together</span>
+      <p class="body">Match, message, and find your place. Somnia connects you with the right person before you sign a lease.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="left">© 2026 <span>Somnia</span>.</span>
+  <span class="left">don't sleep on good roommates.</span>
+</footer>
+
+<script>
+  const form = document.getElementById('waitlist-form');
+  const success = document.getElementById('success');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: 'POST', body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>
