@@ -33,8 +33,8 @@
     padding: 24px 48px;
     border-bottom: 1px solid var(--line);
   }
-  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-wordmark { font-size: 24px; font-weight: 500; color: var(--sage); letter-spacing: -0.035em; }
+  .nav-logo { display: flex; align-items: center; gap: 2px; text-decoration: none; }
+  .nav-wordmark { font-size: 26px; font-weight: 600; color: var(--sage); letter-spacing: -0.035em; line-height: 1; vertical-align: middle; position: relative; top: 0px; }
   .nav-cta {
     background: var(--sage); color: #000; font-family: "Outfit", sans-serif;
     font-weight: 600; font-size: 14px; padding: 10px 22px;
@@ -57,10 +57,45 @@
     letter-spacing: 0.02em;
   }
   .hero .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
-  .hero h1 {
-    font-size: clamp(48px, 8vw, 88px); font-weight: 700;
-    color: var(--sage); letter-spacing: -0.04em; line-height: 1;
+  .hcards-wrap {
+    position: relative;
+    width: 100%;
+    height: 160px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hcard {
+    position: absolute;
+    width: min(560px, 88vw);
+    height: 148px;
+    border-radius: 22px;
+    background: var(--sage);
+    opacity: 0;
+    will-change: transform, opacity;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hcard--2 { filter: brightness(0.82); }
+  .hcard--1 { filter: brightness(0.91); }
+  .hcard-label {
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 700;
+    color: var(--forest);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    opacity: 0;
+  }
+  .hero-wordmark {
+    position: absolute;
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 700;
+    color: var(--sage);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    opacity: 0;
   }
   .hero .tagline {
     font-size: clamp(18px, 3vw, 24px); font-weight: 400;
@@ -86,7 +121,7 @@
     white-space: nowrap; transition: opacity 0.15s;
   }
   button[type="submit"]:hover { opacity: 0.85; }
-  .form-note { font-size: 12px; color: var(--muted); text-align: center; }
+  .form-note { font-size: 14px; color: var(--muted); text-align: center; }
   .success-msg {
     display: none; background: rgba(143,188,143,0.1);
     border: 1px solid var(--line); border-radius: 12px;
@@ -101,21 +136,140 @@
   }
   .section h2 {
     font-size: 13px; font-weight: 400; color: var(--muted);
-    letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 48px;
+    letter-spacing: 0.16em; margin-bottom: 48px;
     text-align: center;
   }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .step {
-    background: var(--forest-2); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 24px;
-    display: flex; flex-direction: column; gap: 12px;
+  /* PHONE DEMOS */
+  .phone-demos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
+  .phone-demo { display: flex; flex-direction: column; align-items: center; gap: 18px; opacity: 0; transform: translateY(24px); }
+  .phone-frame {
+    width: 200px; height: 410px;
+    background: #0d1f14;
+    border: 1.5px solid rgba(143,188,143,0.2);
+    border-radius: 40px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 28px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(143,188,143,0.07);
   }
-  .step .num {
-    font-size: 11px; color: var(--sage); letter-spacing: 0.1em;
-    font-weight: 500;
+  .phone-notch {
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 54px; height: 5px;
+    background: rgba(143,188,143,0.16); border-radius: 3px; z-index: 10;
   }
-  .step .title { font-size: 18px; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
-  .step .body { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .phone-screen { position: absolute; inset: 0; padding: 36px 14px 14px; }
+
+  /* profile screen */
+  .ps-header { font-size: 12px; font-weight: 600; color: var(--sage); text-align: center; margin-bottom: 12px; }
+  .ps-avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: rgba(143,188,143,0.15); border: 1.5px solid rgba(143,188,143,0.35);
+    color: var(--sage); font-size: 20px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+  }
+  .ps-fields { display: flex; flex-direction: column; gap: 7px; }
+  .ps-field {
+    background: rgba(143,188,143,0.06); border: 1px solid rgba(143,188,143,0.11);
+    border-radius: 10px; padding: 7px 10px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .ps-label { font-size: 8px; color: rgba(232,239,229,0.38); letter-spacing: 0.09em; }
+  .ps-value { font-size: 11px; color: var(--fg); font-weight: 500; }
+  .ps-toggle { display: flex; gap: 4px; margin-top: 2px; }
+  .ps-tog-opt { font-size: 9px; padding: 2px 7px; border-radius: 20px; color: rgba(232,239,229,0.35); }
+  .ps-tog-opt.active { background: rgba(143,188,143,0.18); color: var(--sage); }
+  .ps-dots { display: flex; gap: 4px; margin-top: 3px; }
+  .ps-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(143,188,143,0.12); border: 1px solid rgba(143,188,143,0.2); }
+  .ps-dot.on { background: var(--sage); border-color: var(--sage); }
+
+  /* swipe screen */
+  @keyframes swipeHint {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    35%, 60%  { transform: rotate(7deg) translateX(10px); }
+  }
+  @keyframes heartPop {
+    0%, 28%   { opacity: 0; transform: scale(0.5) rotate(-12deg); }
+    42%, 60%  { opacity: 1; transform: scale(1)   rotate(-12deg); }
+    78%, 100% { opacity: 0; transform: scale(0.5) rotate(-12deg); }
+  }
+  .sw-screen {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 14px !important;
+  }
+  .sw-card {
+    flex: 1;
+    background: rgba(143,188,143,0.07); border: 1px solid rgba(143,188,143,0.16);
+    border-radius: 16px; overflow: hidden;
+    position: relative; transform-origin: bottom center;
+    animation: swipeHint 3.8s ease-in-out 1.4s infinite;
+    display: flex; flex-direction: column;
+  }
+  .sw-photo {
+    height: 132px; flex-shrink: 0;
+    background: linear-gradient(150deg, rgba(143,188,143,0.2) 0%, rgba(143,188,143,0.07) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 46px; font-weight: 700; color: rgba(143,188,143,0.4);
+    border-bottom: 1px solid rgba(143,188,143,0.1);
+  }
+  .sw-heart-overlay {
+    position: absolute; top: 12px; left: 12px; opacity: 0; z-index: 2;
+    font-size: 26px; color: var(--sage);
+    animation: heartPop 3.8s ease-in-out 1.4s infinite;
+  }
+  .sw-info { padding: 9px 11px; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+  .sw-name { font-size: 13px; font-weight: 600; color: var(--fg); }
+  .sw-detail { font-size: 9px; color: var(--muted); }
+  .sw-bio { font-size: 9px; color: rgba(232,239,229,0.55); line-height: 1.5; }
+  .sw-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+  .sw-tag { font-size: 8px; padding: 2px 6px; border-radius: 20px; background: rgba(143,188,143,0.09); border: 1px solid rgba(143,188,143,0.16); color: var(--sage); }
+  .sw-pct { font-size: 10px; font-weight: 600; color: var(--sage); margin-top: auto; }
+  .sw-btns { display: flex; justify-content: center; gap: 22px; flex-shrink: 0; }
+  .sw-btn {
+    width: 44px; height: 44px; border-radius: 50%; border: none;
+    font-size: 17px; cursor: default;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sw-no  { background: rgba(255,80,80,0.13); color: #ff7070; }
+  .sw-yes { background: rgba(143,188,143,0.18); color: var(--sage); }
+
+  /* match screen */
+  @keyframes glowPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.35; }
+    50%       { transform: scale(1.18); opacity: 0.65; }
+  }
+  .match-screen {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; gap: 0;
+    padding: 0 14px !important;
+  }
+  .match-glow {
+    position: absolute; width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(143,188,143,0.28) 0%, transparent 68%);
+    animation: glowPulse 2.8s ease-in-out infinite;
+  }
+  .match-avatars { display: flex; position: relative; margin-bottom: 16px; z-index: 1; }
+  .match-av {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: rgba(143,188,143,0.18); border: 2px solid var(--sage);
+    color: var(--sage); font-size: 20px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .match-av--you { margin-right: -14px; z-index: 2; }
+  .match-av--them { z-index: 1; }
+  .match-title { font-size: 15px; font-weight: 700; color: var(--sage); margin-bottom: 5px; z-index: 1; }
+  .match-sub { font-size: 9px; color: var(--muted); margin-bottom: 16px; z-index: 1; line-height: 1.5; }
+  .match-cta {
+    background: var(--sage); color: var(--forest);
+    border: none; border-radius: 20px; padding: 8px 18px;
+    font-size: 10px; font-weight: 600; cursor: default; z-index: 1;
+    font-family: "Outfit", sans-serif;
+  }
+
+  /* demo labels below phones */
+  .demo-label { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
+  .demo-label .num { font-size: 11px; color: var(--sage); letter-spacing: 0.1em; font-weight: 500; }
+  .demo-label .title { font-size: 15px; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
 
   /* FOOTER */
   footer {
@@ -127,11 +281,42 @@
   footer .left { font-size: 13px; color: var(--muted); }
   footer .left span { color: var(--sage); }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     nav { padding: 20px 24px; }
-    .steps { grid-template-columns: 1fr; }
+    .phone-demos { grid-template-columns: 1fr; }
     .input-row { flex-direction: column; }
     footer { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  /* hide everything until JS wakes it */
+  nav { opacity: 0; }
+  .badge { opacity: 0; }
+  .hero .tagline { opacity: 0; }
+  .form-wrap { opacity: 0; }
+  /* triggered by JS: add class "animate-in" */
+  nav.animate-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  .badge.animate-in {
+    animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .hero .tagline.animate-in {
+    animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .form-wrap.animate-in {
+    animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .phone-demo.animate-in {
+    animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
   }
 </style>
 </head>
@@ -139,70 +324,163 @@
 
 <nav>
   <a class="nav-logo" href="#">
-    <svg viewBox="0 0 100 100" width="36" height="36" style="display:block">
-      <rect width="100" height="100" rx="22" fill="#1a3a2a" stroke="rgba(143,188,143,0.16)" stroke-width="1"/>
+    <svg viewBox="0 0 100 100" width="52" height="52" style="display:block">
+      <rect width="100" height="100" rx="22" fill="#1a3a2a"/>
       <g transform="translate(50 50)">
         <rect x="-18" y="-26" width="36" height="52" rx="5" fill="#8fbc8f" opacity="0.32" transform="rotate(-16)"/>
         <rect x="-18" y="-26" width="36" height="52" rx="5" fill="#8fbc8f" opacity="0.62" transform="rotate(-2)"/>
         <rect x="-18" y="-26" width="36" height="52" rx="5" fill="#8fbc8f" transform="rotate(12)"/>
         <g transform="rotate(12) translate(0 -3)">
-          <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
-            font-family="Outfit, sans-serif" font-weight="500" font-size="36"
+          <text x="-2" y="0" text-anchor="middle" dominant-baseline="central"
+            font-family="Outfit, sans-serif" font-weight="700" font-size="38" font-style="italic"
             fill="#1a3a2a" style="letter-spacing:-0.035em">s</text>
         </g>
       </g>
     </svg>
     <span class="nav-wordmark">somnia</span>
   </a>
-  <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+  <a href="#waitlist" class="nav-cta">join waitlist</a>
 </nav>
 
 <section class="hero" id="waitlist">
-  <div class="badge"><span class="dot"></span> Coming to BU first</div>
-  <h1>somnia</h1>
+  <div class="badge"><span class="dot"></span> coming to your university soon</div>
+  <div class="hcards-wrap" id="hero-title" role="heading" aria-level="1" aria-label="somnia">
+    <div class="hcard hcard--2"></div>
+    <div class="hcard hcard--1"></div>
+    <div class="hcard hcard--0">
+      <span class="hcard-label">somnia</span>
+    </div>
+    <span class="hero-wordmark">somnia</span>
+  </div>
   <p class="tagline">don't sleep on good roommates.</p>
 
   <div class="form-wrap">
     <form action="https://formspree.io/f/xgodbzke" method="POST" id="waitlist-form">
       <div class="input-row">
-        <input type="email" name="email" placeholder="your@bu.edu" required />
-        <button type="submit">Join Waitlist</button>
+        <input type="email" name="email" placeholder="your@university.edu" required />
+        <button type="submit">join waitlist</button>
       </div>
-      <p class="form-note">Be the first to know when Somnia launches at BU.</p>
+      <p class="form-note">be the first to know when somnia comes to your university.</p>
     </form>
     <div class="success-msg" id="success">
-      You're on the list! We'll reach out when Somnia launches at BU.
+      you're on the list! we'll reach out when somnia comes to your university.
     </div>
   </div>
 </section>
 
 <section class="section">
-  <h2>How it works</h2>
-  <div class="steps">
-    <div class="step">
-      <span class="num">01</span>
-      <span class="title">Build your profile</span>
-      <p class="body">Tell us about your lifestyle — sleep schedule, diet, habits, and what you're looking for in a living situation.</p>
+  <h2>how it works</h2>
+  <div class="phone-demos">
+
+    <!-- Step 1: Build your profile -->
+    <div class="phone-demo">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-header">my profile</div>
+          <div class="ps-avatar">I</div>
+          <div class="ps-fields">
+            <div class="ps-field">
+              <span class="ps-label">name</span>
+              <span class="ps-value">iris kumar</span>
+            </div>
+            <div class="ps-field">
+              <span class="ps-label">major</span>
+              <span class="ps-value">data science</span>
+            </div>
+            <div class="ps-field">
+              <span class="ps-label">sleep schedule</span>
+              <div class="ps-toggle">
+                <span class="ps-tog-opt">early bird</span>
+                <span class="ps-tog-opt active">night owl</span>
+              </div>
+            </div>
+            <div class="ps-field">
+              <span class="ps-label">cleanliness</span>
+              <div class="ps-dots">
+                <span class="ps-dot on"></span>
+                <span class="ps-dot on"></span>
+                <span class="ps-dot on"></span>
+                <span class="ps-dot on"></span>
+                <span class="ps-dot"></span>
+              </div>
+            </div>
+            <div class="ps-field">
+              <span class="ps-label">apartment budget</span>
+              <span class="ps-value">$900–$1,200/mo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-label">
+        <span class="num">01</span>
+        <span class="title">build your profile.</span>
+      </div>
     </div>
-    <div class="step">
-      <span class="num">02</span>
-      <span class="title">Get matched</span>
-      <p class="body">Swipe through compatible roommates ranked by how well your lifestyles align. No random pairings.</p>
+
+    <!-- Step 2: Get matched -->
+    <div class="phone-demo">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen sw-screen">
+          <div class="sw-card">
+            <div class="sw-photo">M</div>
+            <div class="sw-heart-overlay">♥</div>
+            <div class="sw-info">
+              <div class="sw-name">maddy allen</div>
+              <div class="sw-detail">pre-law · junior</div>
+              <div class="sw-bio">pre-law who loves hiking, pad thai, and hosting functions.</div>
+              <div class="sw-tags">
+                <span class="sw-tag">🌙 night owl</span>
+                <span class="sw-tag">🎉 loves to go out</span>
+                <span class="sw-tag">✨ very clean</span>
+              </div>
+              <div class="sw-pct">91% match</div>
+            </div>
+          </div>
+          <div class="sw-btns">
+            <button class="sw-btn sw-no">✕</button>
+            <button class="sw-btn sw-yes">♥</button>
+          </div>
+        </div>
+      </div>
+      <div class="demo-label">
+        <span class="num">02</span>
+        <span class="title">get matched.</span>
+      </div>
     </div>
-    <div class="step">
-      <span class="num">03</span>
-      <span class="title">Move in together</span>
-      <p class="body">Match, message, and find your place. Somnia connects you with the right person before you sign a lease.</p>
+
+    <!-- Step 3: Move in together -->
+    <div class="phone-demo">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen match-screen">
+          <div class="match-glow"></div>
+          <div class="match-avatars">
+            <div class="match-av match-av--you">I</div>
+            <div class="match-av match-av--them">M</div>
+          </div>
+          <div class="match-title">it's a match!</div>
+          <div class="match-sub">you and maddy both<br>swiped right</div>
+          <button class="match-cta">start chatting →</button>
+        </div>
+      </div>
+      <div class="demo-label">
+        <span class="num">03</span>
+        <span class="title">move in together.</span>
+      </div>
     </div>
+
   </div>
 </section>
 
 <footer>
-  <span class="left">© 2026 <span>Somnia</span>.</span>
+  <span class="left">© 2026 <span>somnia</span>.</span>
   <span class="left">don't sleep on good roommates.</span>
 </footer>
 
 <script>
+  /* ── Form submit ── */
   const form = document.getElementById('waitlist-form');
   const success = document.getElementById('success');
   form.addEventListener('submit', async (e) => {
@@ -217,6 +495,101 @@
       success.style.display = 'block';
     }
   });
+
+  /* ── Entrance animations ── */
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function runEntrance() {
+    // NAV
+    document.querySelector('nav').classList.add('animate-in');
+    await delay(200);
+
+    // BADGE
+    document.querySelector('.badge').classList.add('animate-in');
+    await delay(280);
+
+    // CARD SHUFFLE
+    const ease = 'cubic-bezier(0.22,1,0.36,1)';
+    const card2  = document.querySelector('.hcard--2');
+    const card1  = document.querySelector('.hcard--1');
+    const card0  = document.querySelector('.hcard--0');
+    const label  = document.querySelector('.hcard-label');
+    const wmark  = document.querySelector('.hero-wordmark');
+
+    // Phase 1: deal cards in from below, fanning to logo angles
+    card2.animate([
+      { opacity: 0, transform: 'translateY(70px) rotate(-16deg)' },
+      { opacity: 1, transform: 'translateY(0)   rotate(-16deg)' }
+    ], { duration: 750, easing: ease, fill: 'forwards' });
+    await delay(220);
+
+    card1.animate([
+      { opacity: 0, transform: 'translateY(70px) rotate(-2deg)' },
+      { opacity: 1, transform: 'translateY(0)   rotate(-2deg)' }
+    ], { duration: 750, easing: ease, fill: 'forwards' });
+    await delay(220);
+
+    card0.animate([
+      { opacity: 0, transform: 'translateY(70px) rotate(12deg)' },
+      { opacity: 1, transform: 'translateY(0)   rotate(12deg)' }
+    ], { duration: 750, easing: ease, fill: 'forwards' });
+
+    // fade the label in on the front card
+    label.animate([{ opacity: 0 }, { opacity: 1 }],
+      { duration: 420, delay: 350, easing: 'ease', fill: 'forwards' });
+
+    // Phase 2: hold — show the fanned deck
+    await delay(1100);
+
+    // Phase 3: back cards fly off in opposite directions
+    card2.animate([
+      { opacity: 1, transform: 'rotate(-16deg)' },
+      { opacity: 0, transform: 'translateY(-50px) translateX(-60px) rotate(-32deg) scale(0.8)' }
+    ], { duration: 620, easing: ease, fill: 'forwards' });
+
+    card1.animate([
+      { opacity: 1, transform: 'rotate(-2deg)' },
+      { opacity: 0, transform: 'translateY(-40px) translateX(50px) rotate(18deg) scale(0.85)' }
+    ], { duration: 620, delay: 100, easing: ease, fill: 'forwards' });
+
+    // Phase 4: front card straightens
+    card0.animate([
+      { transform: 'rotate(12deg)' },
+      { transform: 'rotate(0deg)'  }
+    ], { duration: 600, easing: ease, fill: 'forwards' });
+    await delay(680);
+
+    // Phase 5: card dissolves, hero wordmark fades in underneath
+    card0.animate([{ opacity: 1 }, { opacity: 0 }],
+      { duration: 520, easing: 'ease', fill: 'forwards' });
+    wmark.animate([{ opacity: 0 }, { opacity: 1 }],
+      { duration: 520, easing: 'ease', fill: 'forwards' });
+
+    await delay(520);
+
+    // TAGLINE
+    document.querySelector('.tagline').classList.add('animate-in');
+    await delay(220);
+
+    // FORM
+    document.querySelector('.form-wrap').classList.add('animate-in');
+  }
+
+  runEntrance();
+
+  /* ── Scroll-triggered phone demos (cascade) ── */
+  const demos = document.querySelectorAll('.phone-demo');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        [...demos].forEach((d, i) => {
+          setTimeout(() => d.classList.add('animate-in'), i * 150);
+        });
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.12 });
+  observer.observe(document.querySelector('.phone-demos'));
 </script>
 
 </body>
