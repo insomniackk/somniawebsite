@@ -34,8 +34,10 @@
     padding: 24px 48px;
     border-bottom: 1px solid var(--line);
   }
-  .nav-logo { display: flex; align-items: center; gap: 2px; text-decoration: none; }
-  .nav-wordmark { font-size: 26px; font-weight: 600; color: var(--sage); letter-spacing: -0.035em; line-height: 1; vertical-align: middle; position: relative; top: 0px; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .nav-logo-text { display: flex; flex-direction: column; gap: 2px; }
+  .nav-wordmark { font-size: 26px; font-weight: 600; color: var(--sage); letter-spacing: -0.035em; line-height: 1; }
+  .nav-tagline { font-size: 11px; color: var(--muted); font-weight: 400; letter-spacing: -0.01em; }
   .nav-cta {
     background: var(--sage); color: #000; font-family: "Outfit", sans-serif;
     font-weight: 600; font-size: 14px; padding: 10px 22px;
@@ -158,28 +160,60 @@
   }
   .phone-screen { position: absolute; inset: 0; padding: 36px 14px 14px; }
 
-  /* profile screen */
-  .ps-header { font-size: 12px; font-weight: 600; color: var(--sage); text-align: center; margin-bottom: 12px; }
-  .ps-avatar {
-    width: 50px; height: 50px; border-radius: 50%;
-    background: rgba(143,188,143,0.15); border: 1.5px solid rgba(143,188,143,0.35);
-    color: var(--sage); font-size: 20px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+  /* chat screen */
+  .chat-screen {
+    display: flex; flex-direction: column;
+    padding: 30px 10px 10px !important; gap: 0;
   }
-  .ps-fields { display: flex; flex-direction: column; gap: 7px; }
-  .ps-field {
-    background: rgba(143,188,143,0.06); border: 1px solid rgba(143,188,143,0.11);
-    border-radius: 10px; padding: 7px 10px;
-    display: flex; flex-direction: column; gap: 3px;
+  .chat-header {
+    font-size: 10px; font-weight: 600; color: var(--sage);
+    text-align: center; padding: 4px 0 8px;
+    border-bottom: 1px solid rgba(143,188,143,0.1);
+    display: flex; align-items: center; justify-content: center; gap: 5px;
   }
-  .ps-label { font-size: 8px; color: rgba(232,239,229,0.38); letter-spacing: 0.09em; }
-  .ps-value { font-size: 11px; color: var(--fg); font-weight: 500; }
-  .ps-toggle { display: flex; gap: 4px; margin-top: 2px; }
-  .ps-tog-opt { font-size: 9px; padding: 2px 7px; border-radius: 20px; color: rgba(232,239,229,0.35); }
-  .ps-tog-opt.active { background: rgba(143,188,143,0.18); color: var(--sage); }
-  .ps-dots { display: flex; gap: 4px; margin-top: 3px; }
-  .ps-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(143,188,143,0.12); border: 1px solid rgba(143,188,143,0.2); }
-  .ps-dot.on { background: var(--sage); border-color: var(--sage); }
+  .chat-ai-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); }
+  .chat-messages { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 10px 0; overflow: hidden; }
+  .chat-bubble {
+    max-width: 82%; padding: 7px 10px;
+    font-size: 9px; line-height: 1.5; border-radius: 14px;
+  }
+  .chat-bubble.ai {
+    background: rgba(143,188,143,0.12); border: 1px solid rgba(143,188,143,0.18);
+    color: var(--fg); border-bottom-left-radius: 4px; align-self: flex-start;
+  }
+  .chat-bubble.user {
+    background: var(--sage); color: var(--forest);
+    border-bottom-right-radius: 4px; align-self: flex-end; font-weight: 500;
+    margin-top: 6px;
+  }
+  .chat-typing {
+    display: flex; align-items: center; gap: 3px;
+    background: rgba(143,188,143,0.12); border: 1px solid rgba(143,188,143,0.18);
+    padding: 7px 10px; border-radius: 14px; border-bottom-left-radius: 4px;
+    align-self: flex-start; margin-top: 2px;
+  }
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+    30% { transform: translateY(-3px); opacity: 1; }
+  }
+  .chat-dot {
+    width: 4px; height: 4px; border-radius: 50%; background: var(--sage);
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+  .chat-dot:nth-child(2) { animation-delay: 0.2s; }
+  .chat-dot:nth-child(3) { animation-delay: 0.4s; }
+  .chat-input-bar {
+    background: rgba(143,188,143,0.06); border: 1px solid rgba(143,188,143,0.14);
+    border-radius: 20px; padding: 6px 6px 6px 10px;
+    font-size: 8px; color: rgba(232,239,229,0.3);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .chat-send {
+    width: 18px; height: 18px; border-radius: 50; flex-shrink: 0;
+    background: var(--sage); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: var(--forest); font-weight: 700;
+  }
 
   /* swipe screen */
   @keyframes swipeHint {
@@ -192,14 +226,11 @@
     78%, 100% { opacity: 0; transform: scale(0.5) rotate(-12deg); }
   }
   .sw-screen {
-    display: flex !important;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 14px !important;
+    display: flex !important; flex-direction: column;
+    gap: 10px; padding-bottom: 14px !important;
   }
   .sw-card {
-    flex: 1;
-    background: rgba(143,188,143,0.07); border: 1px solid rgba(143,188,143,0.16);
+    flex: 1; background: rgba(143,188,143,0.07); border: 1px solid rgba(143,188,143,0.16);
     border-radius: 16px; overflow: hidden;
     position: relative; transform-origin: bottom center;
     animation: swipeHint 3.8s ease-in-out 1.4s infinite;
@@ -223,7 +254,9 @@
   .sw-bio { font-size: 9px; color: rgba(232,239,229,0.55); line-height: 1.5; }
   .sw-tags { display: flex; flex-wrap: wrap; gap: 3px; }
   .sw-tag { font-size: 8px; padding: 2px 6px; border-radius: 20px; background: rgba(143,188,143,0.09); border: 1px solid rgba(143,188,143,0.16); color: var(--sage); }
-  .sw-pct { font-size: 10px; font-weight: 600; color: var(--sage); margin-top: auto; }
+  .sw-bottom { display: flex; align-items: center; justify-content: flex-start; gap: 5px; margin-top: auto; }
+  .sw-pct { font-size: 10px; font-weight: 600; color: var(--sage); }
+  .sw-seewhy { font-size: 8.5px; color: var(--sage); opacity: 0.65; cursor: default; }
   .sw-btns { display: flex; justify-content: center; gap: 22px; flex-shrink: 0; }
   .sw-btn {
     width: 44px; height: 44px; border-radius: 50%; border: none;
@@ -233,7 +266,42 @@
   .sw-no  { background: rgba(255,80,80,0.13); color: #ff7070; }
   .sw-yes { background: rgba(143,188,143,0.18); color: var(--sage); }
 
-  /* match screen */
+  /* compat screen */
+  .compat-screen {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 8px 12px 10px !important;
+  }
+  .compat-header {
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 8px; border-bottom: 1px solid rgba(143,188,143,0.1);
+  }
+  .compat-av {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(143,188,143,0.15); border: 1.5px solid rgba(143,188,143,0.35);
+    color: var(--sage); font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .compat-info { flex: 1; }
+  .compat-name { font-size: 11px; font-weight: 600; color: var(--fg); }
+  .compat-sub { font-size: 8px; color: var(--muted); }
+  .compat-pct { font-size: 16px; font-weight: 700; color: var(--sage); }
+  .compat-bars { display: flex; flex-direction: column; gap: 7px; }
+  .compat-row { display: flex; flex-direction: column; gap: 3px; }
+  .compat-row-label { display: flex; justify-content: space-between; align-items: center; }
+  .compat-cat { font-size: 8px; color: var(--muted); }
+  .compat-val { font-size: 8px; color: var(--sage); font-weight: 600; }
+  .bar { height: 3px; background: rgba(143,188,143,0.1); border-radius: 2px; width: 100%; }
+  .bar-fill { height: 100%; background: var(--sage); border-radius: 2px; }
+
+  /* explain screen */
+  .explain-screen {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 12px 12px 10px !important; gap: 10px;
+  }
+  .explain-header {
+    font-size: 9px; font-weight: 600; color: var(--muted);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
   @keyframes glowPulse {
     0%, 100% { transform: scale(1);    opacity: 0.35; }
     50%       { transform: scale(1.18); opacity: 0.65; }
@@ -259,18 +327,28 @@
   .match-av--you { margin-right: -14px; z-index: 2; }
   .match-av--them { z-index: 1; }
   .match-title { font-size: 15px; font-weight: 700; color: var(--sage); margin-bottom: 5px; z-index: 1; }
-  .match-sub { font-size: 9px; color: var(--muted); margin-bottom: 16px; z-index: 1; line-height: 1.5; }
+  .match-sub { font-size: 9px; color: var(--muted); margin-bottom: 14px; z-index: 1; line-height: 1.5; }
   .match-cta {
     background: var(--sage); color: var(--forest);
     border: none; border-radius: 20px; padding: 8px 18px;
     font-size: 10px; font-weight: 600; cursor: default; z-index: 1;
-    font-family: "Outfit", sans-serif;
+    font-family: "Outfit", sans-serif; margin-bottom: 14px;
   }
+  .match-why {
+    z-index: 1; width: 100%;
+    border-top: 1px solid rgba(143,188,143,0.12);
+    padding-top: 10px;
+  }
+  .match-why-label { font-size: 8px; color: var(--sage); font-weight: 600; letter-spacing: 0.07em; }
+  .why-dot { display: inline-block; animation: typingBounce 1.2s ease-in-out infinite; }
+  .why-dot:nth-child(2) { animation-delay: 0.2s; }
+  .why-dot:nth-child(3) { animation-delay: 0.4s; }
 
   /* demo labels below phones */
   .demo-label { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
   .demo-label .num { font-size: 11px; color: var(--sage); letter-spacing: 0.1em; font-weight: 500; }
   .demo-label .title { font-size: 15px; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+  .demo-label .desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 4px; max-width: 220px; }
 
   /* FOOTER */
   footer {
@@ -338,7 +416,10 @@
         </g>
       </g>
     </svg>
-    <span class="nav-wordmark">somnia</span>
+    <div class="nav-logo-text">
+      <span class="nav-wordmark">somnia</span>
+      <span class="nav-tagline">the first ai-powered roommate matching platform.</span>
+    </div>
   </a>
   <a href="#waitlist" class="nav-cta">join waitlist</a>
 </nav>
@@ -373,49 +454,32 @@
   <h2>how it works</h2>
   <div class="phone-demos">
 
-    <!-- Step 1: Build your profile -->
+    <!-- Step 1: Talk to Somnia -->
     <div class="phone-demo">
       <div class="phone-frame">
         <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="ps-header">my profile</div>
-          <div class="ps-avatar">I</div>
-          <div class="ps-fields">
-            <div class="ps-field">
-              <span class="ps-label">name</span>
-              <span class="ps-value">iris kumar</span>
-            </div>
-            <div class="ps-field">
-              <span class="ps-label">major</span>
-              <span class="ps-value">data science</span>
-            </div>
-            <div class="ps-field">
-              <span class="ps-label">sleep schedule</span>
-              <div class="ps-toggle">
-                <span class="ps-tog-opt">early bird</span>
-                <span class="ps-tog-opt active">night owl</span>
-              </div>
-            </div>
-            <div class="ps-field">
-              <span class="ps-label">cleanliness</span>
-              <div class="ps-dots">
-                <span class="ps-dot on"></span>
-                <span class="ps-dot on"></span>
-                <span class="ps-dot on"></span>
-                <span class="ps-dot on"></span>
-                <span class="ps-dot"></span>
-              </div>
-            </div>
-            <div class="ps-field">
-              <span class="ps-label">apartment budget</span>
-              <span class="ps-value">$900–$1,200/mo</span>
+        <div class="phone-screen chat-screen">
+          <div class="chat-header">
+            <div class="chat-ai-dot"></div>
+            somnia ai
+          </div>
+          <div class="chat-messages">
+            <div class="chat-bubble ai">hey! are you more of a night owl or early bird? 🌙</div>
+            <div class="chat-bubble user">night owl for sure lol</div>
+            <div class="chat-bubble ai">love that. how do you feel about guests on weekends?</div>
+            <div class="chat-bubble user">occasional is totally fine</div>
+            <div class="chat-typing">
+              <span class="chat-dot"></span>
+              <span class="chat-dot"></span>
+              <span class="chat-dot"></span>
             </div>
           </div>
         </div>
       </div>
       <div class="demo-label">
         <span class="num">01</span>
-        <span class="title">build your profile.</span>
+        <span class="title">talk to somnia.</span>
+        <p class="desc">no forms, no questionnaires. just talk to somnia like a friend and it figures out the rest.</p>
       </div>
     </div>
 
@@ -436,7 +500,10 @@
                 <span class="sw-tag">🎉 loves to go out</span>
                 <span class="sw-tag">✨ very clean</span>
               </div>
-              <div class="sw-pct">91% match</div>
+              <div class="sw-bottom">
+                <div class="sw-pct">91% match</div>
+                <div class="sw-seewhy">see why ✦</div>
+              </div>
             </div>
           </div>
           <div class="sw-btns">
@@ -448,6 +515,7 @@
       <div class="demo-label">
         <span class="num">02</span>
         <span class="title">get matched.</span>
+        <p class="desc">somnia reads your lifestyle and finds people who'd actually live well with you. no randoms, no guessing.</p>
       </div>
     </div>
 
@@ -464,11 +532,15 @@
           <div class="match-title">it's a match!</div>
           <div class="match-sub">you and maddy both<br>swiped right</div>
           <button class="match-cta">start chatting →</button>
+          <div class="match-why">
+            <div class="match-why-label">here's why you two work<span class="why-dot">.</span><span class="why-dot">.</span><span class="why-dot">.</span></div>
+          </div>
         </div>
       </div>
       <div class="demo-label">
         <span class="num">03</span>
         <span class="title">move in together.</span>
+        <p class="desc">see why each match works. no second-guessing — real reasoning.</p>
       </div>
     </div>
 
