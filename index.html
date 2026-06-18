@@ -359,6 +359,11 @@
   }
   footer .left { font-size: 13px; color: var(--muted); }
   footer .left span { color: var(--sage); }
+  footer .footer-links { display: flex; gap: 20px; }
+  footer .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  footer .footer-links a:hover { color: var(--sage); }
+  footer .social a { color: var(--muted); display: flex; align-items: center; transition: color 0.2s; }
+  footer .social a:hover { color: var(--sage); }
 
   @media (max-width: 700px) {
     nav { padding: 20px 24px; }
@@ -549,7 +554,18 @@
 
 <footer>
   <span class="left">© 2026 <span>somnia</span>.</span>
-  <span class="left">don't sleep on good roommates.</span></footer>
+  <span class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms &amp; Conditions</a>
+  </span>
+  <span class="social">
+    <a href="https://www.tiktok.com/@usesomnia" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.89a8.18 8.18 0 0 0 4.78 1.52V6.93a4.84 4.84 0 0 1-1.01-.24z"/>
+      </svg>
+    </a>
+  </span>
+</footer>
 
 <script>
   /* ── Form submit ── */
